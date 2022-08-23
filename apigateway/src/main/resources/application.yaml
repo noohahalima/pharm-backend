@@ -1,0 +1,16 @@
+server:
+    port:8080
+spring:
+    application:
+        name: "pharmacy-api-gateway"
+zuul:
+    routes:
+        user-service:
+            url:
+                http://localhost:9091
+
+
+
+
+
+
