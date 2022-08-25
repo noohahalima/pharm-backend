@@ -25,10 +25,8 @@ public class SupplierService {
 
     public Supplier updateSupplier(Supplier supplier ) throws Exception {
         Optional< Supplier > op = this.supplierRepository.findById(supplier.getId());
-
         if (op.isPresent()) {
             Supplier supplier1 = op.get();
-
             supplierRepository.save(supplier);
             return supplier;
         } else {
