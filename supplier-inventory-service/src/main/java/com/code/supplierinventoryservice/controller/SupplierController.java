@@ -16,31 +16,58 @@ public class SupplierController {
     @Autowired
     SupplierService supplierService;
 
+    @PostMapping("/add")
+    public ResponseEntity< Object > addSupplier(@RequestBody Supplier supplier )
+    {
+        try {
+            return ResponseEntity.ok().body(supplierService.addSupplier(supplier));
+        }
+        catch(Exception e) {
+            return new ResponseEntity<Object>("Cannot add supplier", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/list")
     public ResponseEntity <List<Supplier>> getAllSuppliers() {
+
         return ResponseEntity.ok().body(supplierService.getAllSuppliers());
     }
 
     @GetMapping("list/{id}")
-    public ResponseEntity <Supplier> getSupplierById(@PathVariable String id) throws Exception {
-        return ResponseEntity.ok().body(supplierService.getSupplierById(id));
+    public ResponseEntity <Object> getSupplierById(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok().body(supplierService.getSupplierById(id));
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<Object>("Supplier not found with id"+id,HttpStatus.NOT_FOUND);
+        }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity < Supplier > addSupplier(@RequestBody Supplier supplier ) {
-        return ResponseEntity.ok().body(this.supplierService.addSupplier(supplier));
-    }
+
 
     @PutMapping("/update/{id}")
-    public ResponseEntity < Supplier > updateSupplier(@PathVariable String id, @RequestBody Supplier supplier) throws Exception {
-        supplier.setId(id);
-        return ResponseEntity.ok().body(this.supplierService.updateSupplier(supplier));
+    public ResponseEntity < Object > updateSupplier(@PathVariable String id, @RequestBody Supplier supplier) {
+        try {
+            supplier.setId(id);
+            return ResponseEntity.ok().body(supplierService.updateSupplier(supplier));
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<Object>("Supplier not found with id"+id, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public HttpStatus deleteProduct(@PathVariable String id) throws Exception {
-        this.supplierService.deleteSupplier(id);
-        return HttpStatus.OK;
+    public ResponseEntity deleteSupplier(@PathVariable String id)  {
+        try {
+            this.supplierService.deleteSupplier(id);
+            return new ResponseEntity<String>("Deleted",HttpStatus.OK);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<String>("Supplier not found with id"+id, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

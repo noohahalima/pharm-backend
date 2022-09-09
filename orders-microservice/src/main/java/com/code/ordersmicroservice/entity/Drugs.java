@@ -1,14 +1,10 @@
-package com.code.supplierinventoryservice.entity;
+package com.code.ordersmicroservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
-@Document(collection="Drugs")
+@Document
 public class Drugs {
     @Id
     private String id;
@@ -24,6 +20,7 @@ public class Drugs {
 
     @JsonIgnore
     private boolean deleted=Boolean.FALSE;
+
 
     public boolean isDeleted() {
         return deleted;
@@ -88,5 +85,13 @@ public class Drugs {
     }
 
     public Drugs() {
+    }
+
+    public Drugs( String drugName, int quantity, String batchId, String expiryDate, double price) {
+        this.drugName = drugName;
+        this.quantity = quantity;
+        this.batchId = batchId;
+        this.expiryDate = expiryDate;
+        this.price = price;
     }
 }

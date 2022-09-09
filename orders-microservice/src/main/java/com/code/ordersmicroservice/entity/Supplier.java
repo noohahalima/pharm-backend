@@ -1,4 +1,4 @@
-package com.code.supplierinventoryservice.entity;
+package com.code.ordersmicroservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;

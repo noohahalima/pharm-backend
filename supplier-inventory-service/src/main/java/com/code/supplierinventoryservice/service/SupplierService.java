@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,47 +20,69 @@ public class SupplierService {
 
 
     public Supplier addSupplier(Supplier supplier ) {
-        return supplierRepository.save(supplier);
+
+        return supplierRepository.insert(supplier);
     }
 
 
-    public Supplier updateSupplier(Supplier supplier ) throws Exception {
+    public Supplier updateSupplier(Supplier supplier )  {
         Optional< Supplier > op = this.supplierRepository.findById(supplier.getId());
         if (op.isPresent()) {
             Supplier supplier1 = op.get();
             supplierRepository.save(supplier);
             return supplier;
         } else {
-            throw new Exception("Record not found with id : " + supplier.getId());
+            return null;
         }
     }
 
 
     public List< Supplier > getAllSuppliers() {
+
         return this.supplierRepository.findAll();
     }
 
 
-    public Supplier getSupplierById(String id) throws Exception {
+    public Supplier getSupplierById(String id) {
 
         Optional < Supplier > op = this.supplierRepository.findById(id);
 
         if (op.isPresent()) {
             return op.get();
+
         } else {
-            throw new Exception("Record not found with id : " + id);
+           return null;
         }
     }
 
 
-    public void deleteSupplier(String id) throws Exception {
+    public String disableSupplier(String id)  {
         Optional < Supplier > op = this.supplierRepository.findById(id);
 
         if (op.isPresent()) {
-            this.supplierRepository.delete(op.get());
-        } else {
-            throw new Exception("Record not found with id : " + id);
+           // this.supplierRepository.delete(op.get());
+            Supplier supplier=op.get();
+            supplier.setDeleted(true);
+            supplierRepository.save(supplier);
+
         }
+
+            return null;
+
+
+    }
+
+    public String deleteSupplier(String id)  {
+        Optional < Supplier > op = this.supplierRepository.findById(id);
+
+        if (op.isPresent()) {
+             this.supplierRepository.delete(op.get());
+
+
+        }
+
+        return null;
+
 
     }
 }
