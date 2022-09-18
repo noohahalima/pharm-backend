@@ -17,6 +17,7 @@ public class DrugsController {
     @Autowired
     DrugsService drugsService;
 
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list")
     public ResponseEntity <List<Drugs>> getAllDrugs() {
         return ResponseEntity.ok().body(drugsService.getAllDrugs());

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface DrugsRepository extends MongoRepository<Drugs,String> {
 
-    @Query("{'Supplier.name':?0}")
+    @Query("{'supplierName':?0}")
     List<Drugs> findBySupplier(String supplier);
 
     @Query("{'drugName':?0}")

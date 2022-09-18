@@ -5,6 +5,10 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 @Getter
@@ -14,18 +18,22 @@ public class User{
 
     @Id
     private String id;
-
+    @NotBlank
+    @Size(max = 20)
+    @Email
     private String email;
 
-
+    @NotBlank
+    @Size(max = 20)
     private String username;
 
     @JsonIgnore
-
+    @NotBlank
+    @Size(max = 20)
     private String password;
 
-//    @DBRef
-//    private Set<Role> roles = new HashSet<>();
+    @DBRef
+    private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
     private boolean deleted=Boolean.FALSE;
@@ -46,9 +54,4 @@ public class User{
         this.email = email;
         this.password = password;
     }
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
-    }
-
 }

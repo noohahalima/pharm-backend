@@ -1,5 +1,6 @@
 package com.code.ordersmicroservice.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,25 +8,29 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.List;
-
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Document
-public class Order {
+public class Cart {
+
     @Id
-    private String orderId;
+    private String id;
+
+    @Field
+    private String createdDate;
+
+    @Field
+    private Drugs drug;
+
     @Field
     private User user;
     @Field
-    private String pickupDate;
-    private List<ShoppingCart> cartItems;
+    private int quantity;
 
-    public Order(User user, List<ShoppingCart> cartItems) {
-        this.user = user;
-        this.cartItems = cartItems;
+
+    public Cart() {
     }
+
+
 }

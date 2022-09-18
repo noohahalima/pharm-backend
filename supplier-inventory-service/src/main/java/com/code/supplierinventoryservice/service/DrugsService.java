@@ -17,7 +17,7 @@ public class DrugsService {
 
     public Drugs addDrug(Drugs drug)
     {
-        return drugsRepository.insert(drug);
+        return drugsRepository.save(drug);
     }
 
     public Drugs updateDrug(Drugs drug) throws Exception {

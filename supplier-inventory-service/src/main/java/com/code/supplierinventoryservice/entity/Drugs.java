@@ -19,8 +19,19 @@ public class Drugs {
     private String expiryDate;
     private double price;
 
-    private Supplier supplier;
 
+    private String supplierName;
+
+//    private Supplier supplier;
+
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
 
     @JsonIgnore
     private boolean deleted=Boolean.FALSE;
@@ -32,12 +43,12 @@ public class Drugs {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    public Supplier getSupplier() {
-        return supplier;
-    }
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
+//    public Supplier getSupplier() {
+//        return supplier;
+//    }
+//    public void setSupplier(Supplier supplier) {
+//        this.supplier = supplier;
+//    }
 
     public String getId() {
         return id;
@@ -86,6 +97,8 @@ public class Drugs {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
 
     public Drugs() {
     }

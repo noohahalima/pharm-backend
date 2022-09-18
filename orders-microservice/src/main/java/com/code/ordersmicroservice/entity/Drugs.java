@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+
 public class Drugs {
     @Id
     private String id;
@@ -15,12 +15,22 @@ public class Drugs {
     private String expiryDate;
     private double price;
 
-    private Supplier supplier;
 
+    private String supplierName;
+
+//    private Supplier supplier;
+
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
 
     @JsonIgnore
     private boolean deleted=Boolean.FALSE;
-
 
     public boolean isDeleted() {
         return deleted;
@@ -29,12 +39,12 @@ public class Drugs {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    public Supplier getSupplier() {
-        return supplier;
-    }
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
+//    public Supplier getSupplier() {
+//        return supplier;
+//    }
+//    public void setSupplier(Supplier supplier) {
+//        this.supplier = supplier;
+//    }
 
     public String getId() {
         return id;
@@ -84,14 +94,8 @@ public class Drugs {
         this.price = price;
     }
 
-    public Drugs() {
-    }
 
-    public Drugs( String drugName, int quantity, String batchId, String expiryDate, double price) {
-        this.drugName = drugName;
-        this.quantity = quantity;
-        this.batchId = batchId;
-        this.expiryDate = expiryDate;
-        this.price = price;
+
+    public Drugs() {
     }
 }
